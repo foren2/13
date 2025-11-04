@@ -1,0 +1,115 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ex5
+{
+    using System;
+
+    public class Animal
+    {
+        protected string Species;
+        protected int Age;
+        protected string Habitat;
+        protected string Diet;
+
+        public Animal(string species, int age, string habitat, string diet)
+        {
+            Species = species;
+            Age = age;
+            Habitat = habitat;
+            Diet = diet;
+        }
+
+        public virtual void Eat()
+        {
+            Console.WriteLine($"{Species} ест. Рацион: {Diet}");
+        }
+
+        public virtual void Sleep()
+        {
+            Console.WriteLine($"{Species} спит.");
+        }
+
+        public virtual void Move()
+        {
+            Console.WriteLine($"{Species} передвигается.");
+        }
+
+        public virtual void Info()
+        {
+            Console.WriteLine($"Вид: {Species}, Возраст: {Age}, Среда: {Habitat}, Рацион: {Diet}");
+        }
+    }
+
+    public class Mammal : Animal
+    {
+        public string FurType { get; set; }
+        public int PregnancyDuration { get; set; }
+
+        public Mammal(string species, int age, string habitat, string diet, string furType, int pregnancyDuration): base(species, age, habitat, diet)
+        {
+            FurType = furType;
+            PregnancyDuration = pregnancyDuration;
+        }
+
+        public void NurseBaby()
+        {
+            Console.WriteLine($"{Species} кормит детёнышей молоком.");
+        }
+    }
+
+    public class Bird : Animal
+    {
+        public double WingSpan { get; set; }
+        public string NestingType { get; set; }
+
+        public Bird(string species, int age, string habitat, string diet, double wingSpan, string nestingType): base(species, age, habitat, diet)
+        {
+            WingSpan = wingSpan;
+            NestingType = nestingType;
+        }
+
+        public void Fly()
+        {
+            Console.WriteLine($"{Species} летит.");
+        }
+    }
+
+    public class Reptile : Animal
+    {
+        public string SkinType { get; set; }
+        public double PreferredTemperature { get; set; }
+
+        public Reptile(string species, int age, string habitat, string diet, string skinType, double preferredTemperature): base(species, age, habitat, diet)
+        {
+            SkinType = skinType;
+            PreferredTemperature = preferredTemperature;
+        }
+
+        public void RegulateTemperature()
+        {
+            Console.WriteLine($"{Species} регулирует температуру тела.");
+        }
+    }
+
+    public class Fish : Animal
+    {
+        public string ScaleType { get; set; }
+        public double LivingDepth { get; set; }
+
+        public Fish(string species, int age, string habitat, string diet, string scaleType, double livingDepth): base(species, age, habitat, diet)
+        {
+            ScaleType = scaleType;
+            LivingDepth = livingDepth;
+        }
+
+        public void Swim()
+        {
+            Console.WriteLine($"{Species} плавает.");
+        }
+    }
+
+}
