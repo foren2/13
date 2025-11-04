@@ -1,0 +1,73 @@
+namespace ex3
+public class LibraryItem
+{
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public int Year { get; set; }
+    public bool Available { get; set; }
+
+    public LibraryItem(string title, string author, int year, bool available = true)
+    {
+        Title = title;
+        Author = author;
+        Year = year;
+        Available = available;
+    }
+
+    public override string ToString()
+    {
+        return $"{Title} ({Year}) — {Author}. Доступно: {Available}";
+    }
+}
+
+public class Book : LibraryItem
+{
+    public int PageCount { get; set; }
+    public string ISBN { get; set; }
+
+    public Book(string title, string author, int year, int pageCount, string isbn, bool available = true)
+        : base(title, author, year, available)
+    {
+        PageCount = pageCount;
+        ISBN = isbn;
+    }
+}
+
+public class Magazine : LibraryItem
+{
+    public int IssueNumber { get; set; }
+    public string Frequency { get; set; }
+
+    public Magazine(string title, string author, int year, int issueNumber, string frequency, bool available = true)
+        : base(title, author, year, available)
+    {
+        IssueNumber = issueNumber;
+        Frequency = frequency;
+    }
+}
+
+public class DVD : LibraryItem
+{
+    public int Duration { get; set; }  // мин
+    public string Rating { get; set; }
+
+    public DVD(string title, string author, int year, int duration, string rating, bool available = true)
+        : base(title, author, year, available)
+    {
+        Duration = duration;
+        Rating = rating;
+    }
+}
+
+public class Audiobook : LibraryItem
+{
+    public int Length { get; set; }  // мин
+    public string Narrator { get; set; }
+
+    public Audiobook(string title, string author, int year, int length, string narrator, bool available = true)
+        : base(title, author, year, available)
+    {
+        Length = length;
+        Narrator = narrator;
+    }
+}
