@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ex4
+{
+    using System;
+
+    public class Course
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Author { get; set; }
+        public decimal Price { get; set; }
+
+        public Course(string title, string description, string author, decimal price)
+        {
+            Title = title;
+            Description = description;
+            Author = author;
+            Price = price;
+        }
+
+        public virtual void ShowInfo()
+        {
+            Console.WriteLine($"{Title} — {Author}");
+            Console.WriteLine($"Описание: {Description}");
+            Console.WriteLine($"Цена: {Price} руб.\n");
+        }
+
+        public virtual void StartCourse()
+        {
+            Console.WriteLine($"Курс \"{Title}\" начат.\n");
+        }
+    }
+
+    public class VideoCourse : Course
+    {
+        public int VideoCount { get; set; }
+        public double TotalDuration { get; set; } 
+
+        public VideoCourse(string title, string description, string author, decimal price, int videoCount, double totalDuration) : base(title, description, author, price)
+        {
+            VideoCount = videoCount;
+            TotalDuration = totalDuration;
+        }
+
+        public override void ShowInfo()
+        {
+            base.ShowInfo();
+            Console.WriteLine($"Видео: {VideoCount}, Общая длительность: {TotalDuration} часов\n");
+        }
+    }
+
+    public class TextCourse : Course
+    {
+        public int ChaptersCount { get; set; }
+        public int TextVolume { get; set; } 
+
+        public TextCourse(string title, string description, string author, decimal price, int chaptersCount, int textVolume): base(title, description, author, price)
+        {
+            ChaptersCount = chaptersCount;
+            TextVolume = textVolume;
+        }
+
+        public override void ShowInfo()
+        {
+            base.ShowInfo();
+            Console.WriteLine($"Глав: {ChaptersCount}, Объем текста: {TextVolume} стр.\n");
+        }
+    }
+
+    public class InteractiveCourse : Course
+    {
+        public int ExercisesCount { get; set; }
+        public bool HasAutoCheck { get; set; }
+
+        public InteractiveCourse(string title, string description, string author, decimal price, int exercisesCount, bool hasAutoCheck) : base(title, description, author, price)
+        {
+            ExercisesCount = exercisesCount;
+            HasAutoCheck = hasAutoCheck;
+        }
+
+        public override void ShowInfo()
+        {
+            base.ShowInfo();
+            Console.WriteLine($"Упражнений: {ExercisesCount}, Автопроверка: {(HasAutoCheck ? "Да" : "Нет")}\n");
+        }
+    }
+
+}
