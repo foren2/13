@@ -1,0 +1,95 @@
+namespace ex1
+{
+    public class Director : Employee
+    {
+        public string Department { get; set; }
+
+        public Director(string name, decimal salary, DateTime hireDate, string department)
+            : base(name, "Директор", salary, hireDate)
+        {
+            Department = department;
+        }
+
+        public void ApproveBudget()
+        {
+            Console.WriteLine($"{Name} утверждает бюджет отдела {Department}.");
+        }
+
+        public override void ShowInfo()
+        {
+            base.ShowInfo();
+            Console.WriteLine($"Отдел: {Department}");
+        }
+    }
+
+}
+namespace ex1
+{
+    public class Developer : Employee
+    {
+        public string ProgrammingLanguage { get; set; }
+
+        public Developer(string name, decimal salary, DateTime hireDate, string programmingLanguage): base(name, "Разработчик", salary, hireDate)
+        {
+            ProgrammingLanguage = programmingLanguage;
+        }
+
+        public void WriteCode()
+        {
+            Console.WriteLine($"{Name} пишет код на {ProgrammingLanguage}.");
+        }
+
+        public override void ShowInfo()
+        {
+            base.ShowInfo();
+            Console.WriteLine($"Язык программирования: {ProgrammingLanguage}");
+        }
+    }
+
+}
+namespace ex1
+{
+    public class Manager : Employee
+    {
+        public int TeamSize { get; set; }
+
+        public Manager(string name, decimal salary, DateTime hireDate, int teamSize) : base(name, "Менеджер", salary, hireDate)
+        {
+            TeamSize = teamSize;
+        }
+
+        public void ConductMeeting()
+        {
+            Console.WriteLine($"{Name} проводит собрание своей команды из {TeamSize} человек.");
+        }
+
+        public override void ShowInfo()
+        {
+            base.ShowInfo();
+            Console.WriteLine($"Размер команды: {TeamSize}");
+        }
+    }
+}
+namespace ex1
+{
+    public class Employee
+    {
+        public string Name { get; set; }
+        public string Position { get; set; }
+        public decimal Salary { get; set; }
+        public DateTime HireDate { get; set; }
+
+        public Employee(string name, string position, decimal salary, DateTime hireDate)
+        {
+            Name = name;
+            Position = position;
+            Salary = salary;
+            HireDate = hireDate;
+        }
+
+        public virtual void ShowInfo()
+        {
+            Console.WriteLine($"{Name} — {Position}, зарплата: {Salary}, принят: {HireDate.ToShortDateString()}");
+        }
+    }
+}
