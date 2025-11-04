@@ -1,0 +1,116 @@
+namespace ex2
+{
+    public class CreditAccount : BankAccount
+    {
+        public decimal CreditLimit { get; }
+        public DateTime DueDate { get; }
+
+        public CreditAccount(string acc, string owner, decimal balance, decimal limit, DateTime dueDate)
+            : base(acc, owner, balance)
+        {
+            CreditLimit = limit;
+            DueDate = dueDate;
+        }
+
+        public override void Withdraw(decimal amount)
+        {
+            if (Balance + CreditLimit >= amount)
+            {
+                Balance -= amount;
+                Console.WriteLine($"Снято {amount}. Баланс: {Balance}");
+            }
+            else
+            {
+                Console.WriteLine("Превышен кредитный лимит");
+            }
+        }
+    }
+
+}
+namespace ex2
+{
+    public class SavingsAccount : BankAccount
+    {
+        public decimal InterestRate { get; }
+
+        public SavingsAccount(string acc, string owner, decimal balance, decimal rate)
+            : base(acc, owner, balance)
+        {
+            InterestRate = rate;
+        }
+
+        public override void Withdraw(decimal amount)
+        {
+            if (amount <= Balance)
+            {
+                Balance -= amount;
+                Console.WriteLine($"Снято {amount}. Баланс: {Balance}");
+            }
+            else
+            {
+                Console.WriteLine("Недостаточно средств");
+            }
+        }
+
+        public void AddInterest()
+        {
+            decimal interest = Balance * InterestRate / 100;
+            Balance += interest;
+            Console.WriteLine($"Начислены проценты: {interest}. Баланс: {Balance}");
+        }
+    }
+
+}
+namespace ex2
+{
+    public class CheckingAccount : BankAccount
+    {
+        public decimal OverdraftLimit { get; }
+
+        public CheckingAccount(string acc, string owner, decimal balance, decimal overdraft)
+            : base(acc, owner, balance)
+        {
+            OverdraftLimit = overdraft;
+        }
+
+        public override void Withdraw(decimal amount)
+        {
+            if (Balance + OverdraftLimit >= amount)
+            {
+                Balance -= amount;
+                Console.WriteLine($"Снято {amount}. Баланс: {Balance}");
+            }
+            else
+            {
+                Console.WriteLine("Недостаточно средств (с учетом овердрафта)");
+            }
+        }
+    }
+
+}
+namespace ex2
+{
+    public abstract class BankAccount
+    {
+        public string AccountNumber { get; }
+        public string Onmer { get; }
+        public decimal Balance { get; protected set; }
+        public BankAccount(string accountNumber, string onmer, decimal initialBalance)
+        {
+            AccountNumber = accountNumber;
+            Onmer = onmer;
+            Balance = initialBalance;
+        }
+        public virtual void Deposit(decimal amount)
+        {
+            Balance += amount;
+            Console.WriteLine($"Пополнение {amount}. Баланс: {Balance}");
+        }
+        public abstract void Withdraw(decimal amount);
+        public virtual void ShowInfo()
+        {
+            Console.WriteLine($"Счет: {AccountNumber}, Владелец: {Onmer}, Баланс: {Balance}");
+
+        }
+    }
+}
